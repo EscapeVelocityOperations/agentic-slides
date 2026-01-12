@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verdicité x Escape Velocity — Accélération Conformité</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/theme/black.css">
+    <style>
+        :root {
+            --vd-green: #22c55e;
+            --vd-green-dark: #16a34a;
+            --vd-green-light: #86efac;
+            --vd-amber: #fbbf24;
+            --vd-amber-dark: #f59e0b;
+            --vd-sage: #84cc16;
+        }
+
+        /* Override reveal.js background */
+        .reveal {
+            background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #14532d 100%);
+        }
+
+        /* Section spacing */
+        .reveal .slides section {
+            height: 100%;
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center;
+            padding: 10px 25px;
+        }
+
+        .reveal .slides section.compact {
+            padding: 5px 25px;
+        }
+
+        .reveal .slides section.center {
+            text-align: center;
+            align-items: center;
+        }
+
+        /* Typography */
+        .reveal h1 {
+            font-size: 2.2em;
+            margin-bottom: 0.2em;
+            text-transform: none;
+            color: #fff;
+        }
+
+        .reveal h2 {
+            font-size: 1.6em;
+            margin-bottom: 0.3em;
+            text-transform: none;
+            color: #fff;
+        }
+
+        .reveal h3 {
+            font-size: 1.1em;
+            color: var(--vd-green-light);
+            text-transform: none;
+            margin-bottom: 0.3em;
+        }
+
+        .reveal h4 {
+            font-size: 0.95em;
+            color: var(--vd-amber);
+            text-transform: none;
+            margin-bottom: 0.2em;
+        }
+
+        /* Gradient text effect */
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--vd-green-light) 0%, var(--vd-green) 50%, var(--vd-green-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: var(--vd-green);
+        }
+
+        .accent-text {
+            color: var(--vd-green-light) !important;
+        }
+
+        /* Lists */
+        .reveal ul {
+            margin-left: 1em;
+            margin-bottom: 0.5em;
+        }
+
+        .reveal li {
+            margin-bottom: 0.4em;
+            line-height: 1.3;
+            font-size: 0.9em;
+        }
+
+        .reveal p {
+            margin-bottom: 0.5em;
+            line-height: 1.3;
+            font-size: 0.9em;
+        }
+
+        /* Tags */
+        .tag {
+            display: inline-block;
+            background: rgba(34, 197, 94, 0.25);
+            border: 1px solid var(--vd-green);
+            color: #bbf7d0;
+            padding: 0.2em 0.6em;
+            margin: 0.2em;
+            border-radius: 20px;
+            font-size: 0.75em;
+        }
+
+        .accent-tag {
+            background: rgba(251, 191, 36, 0.25);
+            border-color: var(--vd-amber);
+            color: #fef3c7;
+        }
+
+        /* Content boxes */
+        .box {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            border-radius: 10px;
+            padding: 0.8em 1em;
+            margin: 0.5em 0;
+        }
+
+        .box-accent {
+            border-color: var(--vd-amber);
+            background: rgba(251, 191, 36, 0.08);
+        }
+
+        /* Workflow steps */
+        .workflow-step {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--vd-green), var(--vd-green-dark));
+            color: white;
+            padding: 0.4em 0.9em;
+            margin: 0.2em;
+            border-radius: 6px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        /* Stats grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8em;
+            margin: 0.8em 0;
+        }
+
+        .stat-box {
+            background: rgba(34, 197, 94, 0.2);
+            padding: 0.8em;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: var(--vd-amber);
+            line-height: 1;
+        }
+
+        .stat-box div {
+            font-size: 0.85em;
+        }
+
+        /* Feature grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.6em;
+            margin: 0.6em 0;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 0.6em 0.8em;
+            border-radius: 8px;
+            border-left: 2px solid var(--vd-green);
+        }
+
+        .feature-item p {
+            font-size: 0.8em;
+            margin: 0;
+            color: #cbd5e1;
+        }
+
+        /* Target box */
+        .target-box {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(132, 204, 22, 0.15));
+            border: 1px solid var(--vd-sage);
+            padding: 0.8em 1em;
+            border-radius: 10px;
+            margin: 0.6em 0;
+        }
+
+        /* Progress bar */
+        .reveal .progress {
+            height: 3px;
+        }
+
+        .reveal .progress span {
+            background: linear-gradient(90deg, var(--vd-green), var(--vd-sage));
+        }
+
+        /* Controls */
+        .reveal .controls button {
+            color: var(--vd-green);
+        }
+
+        .reveal .controls button:after {
+            background-color: var(--vd-green);
+        }
+
+        /* Strong text */
+        .reveal strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* Emojis */
+        .emoji-large {
+            font-size: 1.2em;
+        }
+
+        /* Logo styling */
+        .logo {
+            max-height: 100px;
+            margin-bottom: 0.5em;
+        }
+
+        .logo-dual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2em;
+            margin-bottom: 0.5em;
+        }
+
+        .logo-dual img {
+            max-height: 80px;
+        }
+
+        /* Contact box */
+        .contact-box {
+            max-width: 450px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        /* Smaller text */
+        .small-note {
+            font-size: 0.75em;
+            color: #94a3b8;
+        }
+
+        /* Partnership styling */
+        .partnership-badge {
+            background: linear-gradient(135deg, var(--vd-green), var(--vd-sage));
+            color: white;
+            padding: 0.3em 0.8em;
+            border-radius: 20px;
+            font-size: 0.7em;
+            font-weight: bold;
+            margin-bottom: 0.5em;
+        }
+
+        /* Client highlight */
+        .client-highlight {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(132, 204, 22, 0.2));
+            border: 1px solid var(--vd-green-light);
+            padding: 0.6em 1em;
+            border-radius: 10px;
+            margin: 0.5em 0;
+        }
+
+        /* Timeline */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+            margin: 0.8em 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+
+        .timeline-arrow {
+            color: var(--vd-green-light);
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Slide 1: Title -->
+            <section class="center compact">
+                <div class="logo-dual">
+                    <img src="logo-verdicite.png" alt="Verdicité">
+                    <span style="font-size: 2em; color: var(--vd-green-light);">×</span>
+                    <img src="logo-evo.png" alt="Escape Velocity Operations">
+                </div>
+                <h1 class="hero-gradient">Verdicité</h1>
+                <h2 class="accent-text">Accélération Conformité & Automatisation</h2>
+                <p style="margin-top: 0.5em; font-size: 0.9em;">Votre expertise environnementale + nos agents IA</p>
+                <div style="margin-top: 0.6em;">
+                    <span class="tag">Conformité</span>
+                    <span class="tag">Déchets</span>
+                    <span class="tag">Automatisation</span>
+                    <span class="tag accent-tag">Partenariat</span>
+                </div>
+            </section>
+
+            <!-- Slide 2: Verdicité Overview -->
+            <section>
+                <h2><span class="emoji-large">🌿</span> Verdicité en Bref</h2>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-number">1998</div>
+                        <div>Année de création</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">83</div>
+                        <div>Collaborateurs</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">5</div>
+                        <div>Agences en France</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">1000+</div>
+                        <div>Clients accompagnés</div>
+                    </div>
+                </div>
+                <div class="box">
+                    <h3 class="accent-text">Bureau d'études environnement</h3>
+                    <p><strong>Prévention, optimisation et gestion des déchets</strong></p>
+                    <ul style="margin-top: 0.5em;">
+                        <li>Études de gisements et caractérisation</li>
+                        <li>Prévention des déchets (PLPDMA)</li>
+                        <li>Optimisation de la collecte</li>
+                        <li>Financement et tarification incitative</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Slide 3: Verdicité Clients -->
+            <section>
+                <h2><span class="emoji-large">🤝</span> Un Impact National</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4 class="accent-text">🏛️ Administrations</h4>
+                        <p>ADEME, Crous, Sénat, Assemblée Nationale</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">🏙️ Collectivités</h4>
+                        <p>Paris, Rennes, Bordeaux, Grenoble, Lyon...</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">♻️ Éco-organismes</h4>
+                        <p>Citeo, Ecologic</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">🏢 Privés</h4>
+                        <p>Disneyland, Club Med, Compass, Sodexo</p>
+                    </div>
+                </div>
+                <div class="client-highlight" style="margin-top: 0.8em;">
+                    <p style="text-align: center;"><strong>"Contribuons ensemble à l'évolution des territoires vers un futur souhaitable"</strong></p>
+                </div>
+            </section>
+
+            <!-- Slide 4: Le Défit Conformité -->
+            <section>
+                <h2><span class="emoji-large">🎯</span> Le Défi : Conformité & Réglementation</h2>
+                <div class="box">
+                    <h3 class="accent-text">Un environnement réglementaire complexe</h3>
+                    <ul>
+                        <li><strong class="accent-text">Réglementations évolutives</strong> — Loi AGEDEC, TGAP, REP...</li>
+                        <li><strong class="accent-text">Normes techniques</strong> — Modecom, caractérisation normalisée</li>
+                        <li><strong class="accent-text">Reporting clients</strong> — Synthèses, audits, préconisations</li>
+                        <li><strong class="accent-text">Veille réglementaire</strong> — Mise à jour constante des connaissances</li>
+                    </ul>
+                </div>
+                <p class="accent-text">→ La conformité demande du temps... beaucoup de temps.</p>
+            </section>
+
+            <!-- Slide 5: Le Problème -->
+            <section>
+                <h2><span class="emoji-large">⏱️</span> Le Problème : Temps & Répétition</h2>
+                <div class="box">
+                    <h3 class="accent-text">Avant l'automatisation</h3>
+                    <ul>
+                        <li><strong class="accent-text">Analyses répétitives</strong> — Mêmes vérifications sur chaque dossier</li>
+                        <li><strong class="accent-text">Synthèses manuelles</strong> — Assemblage de données dispersées</li>
+                        <li><strong class="accent-text">Veille chronophage</strong> — Surveillance des évolutions réglementaires</li>
+                        <li><strong class="accent-text">Experts sous-utilisés</strong> — Temps perdu sur tâches à faible valeur</li>
+                    </ul>
+                </div>
+                <div class="stats-grid" style="margin-top: 0.8em;">
+                    <div class="stat-box">
+                        <div class="stat-number">-40%</div>
+                        <div>Temps sur tâches répétitives</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">10x</div>
+                        <div>Vitesse d'analyse</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 6: La Solution -->
+            <section>
+                <h2><span class="emoji-large">🚀</span> La Solution : Agents IA de Conformité</h2>
+                <div class="box">
+                    <h3 class="accent-text">Votre expertise amplifiée par l'automatisation</h3>
+                    <div style="text-align: center; margin: 0.8em 0;">
+                        <div class="workflow-step">📄 Dossier client</div>
+                        <span class="accent-text"> → </span>
+                        <div class="workflow-step">🤖 Agent IA</div>
+                        <span class="accent-text"> → </span>
+                        <div class="workflow-step" style="background: linear-gradient(135deg, var(--vd-amber), var(--vd-amber-dark));">✅ Synthèse conforme</div>
+                    </div>
+                    <ul>
+                        <li><strong>Analyse automatique</strong> — Comprend le contexte réglementaire</li>
+                        <li><strong>Vérification normes</strong> — Critères Modecom, REP, TGAP...</li>
+                        <li><strong>Synthèse structurée</strong> — Rapport actionnable immédiatement</li>
+                        <li><strong>Veille proactive</strong> — Alertes sur évolutions réglementaires</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Slide 7: Cas Concret - Caractérisation -->
+            <section>
+                <h2><span class="emoji-large">🔬️</span> Cas Concret : Automatisation Caractérisation</h2>
+                <div class="box">
+                    <h3 class="accent-text">Avant : Processus manuel</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-arrow">→</span>
+                            <span>Réception données brutes</span>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-arrow">→</span>
+                            <span>Saisie manuelle tableaux</span>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-arrow">→</span>
+                            <span>Calculs ratios / flux</span>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-arrow">→</span>
+                            <span>Rédaction synthèse</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="box box-accent">
+                    <h3 class="accent-text">Après : Agent IA</h3>
+                    <p><strong>Upload → Rapport complet en minutes</strong></p>
+                    <ul style="margin-top: 0.3em;">
+                        <li>Extraction automatique des données</li>
+                        <li>Calculs normalisés Modecom</li>
+                        <li>Synthèse avec préconisations</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Slide 8: L'Impact -->
+            <section>
+                <h2><span class="emoji-large">📈</span> L'Impact Mesuré</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4 class="accent-text">⏱️ Temps de traitement</h4>
+                        <p>2-3 heures → <strong>15-20 minutes</strong></p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">🎯 Précision</h4>
+                        <p><strong>100%</strong> des critères vérifiés</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">📊 Consistance</h4>
+                        <p>Méthodologie <strong>normalisée</strong></p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">💪 Valorisation experts</h4>
+                        <p>Focus sur <strong>conseil</strong> et analyse</p>
+                    </div>
+                </div>
+                <div class="box box-accent" style="margin-top: 0.8em;">
+                    <p style="text-align: center;"><strong>"L'automatisation n'a pas remplacé l'expert — elle l'a libéré pour le conseil à haute valeur."</strong></p>
+                </div>
+            </section>
+
+            <!-- Slide 9: Notre Approche Partenariat -->
+            <section>
+                <h2><span class="emoji-large">🤝</span> Notre Philosophie de Partenariat</h2>
+                <div class="box">
+                    <h3 class="accent-text" style="text-align: center; margin-bottom: 0.5em;">On construit sur VOTRE expertise</h3>
+                    <p style="text-align: center;">Verdicité connaît la conformité environnementale. Nous apportons l'accélération.</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-number" style="font-size: 1.6em;">🌿</div>
+                        <div><strong>Votre Expertise</strong></div>
+                        <p class="small-note" style="margin-top: 0.3em;">25 ans de connaissance déchets</p>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" style="font-size: 1.6em;">⚡</div>
+                        <div><strong>+ Nos Agents</strong></div>
+                        <p class="small-note" style="margin-top: 0.3em;">= Accélération</p>
+                    </div>
+                </div>
+                <ul style="margin-top: 0.8em;">
+                    <li><strong>Co-construction</strong> — Agents entraînés sur VOS méthodes</li>
+                    <li><strong>Transparence</strong> — Vous comprenez ce que fait l'agent</li>
+                    <li><strong>Évolutif</strong> — L'agent apprend avec vous</li>
+                </ul>
+            </section>
+
+            <!-- Slide 10: Workflow Accompagnement -->
+            <section>
+                <h2><span class="emoji-large">📋</span> Workflow d'Accompagnement</h2>
+                <div style="text-align: center; margin: 0.8em 0;">
+                    <div class="workflow-step">1. Assessment Processus</div>
+                    <br>
+                    <span class="accent-text">↓</span>
+                    <br>
+                    <div class="workflow-step">2. Co-conception Agents</div>
+                    <br>
+                    <span class="accent-text">↓</span>
+                    <br>
+                    <div class="workflow-step">3. formation Ambassadeurs</div>
+                    <br>
+                    <span class="accent-text">↓</span>
+                    <br>
+                    <div class="workflow-step" style="background: linear-gradient(135deg, var(--vd-amber), var(--vd-amber-dark));">4. Déploiement & Mesure</div>
+                </div>
+            </section>
+
+            <!-- Slide 11: Prochaines Étapes -->
+            <section>
+                <h2><span class="emoji-large">🚀</span> Prochaines Étapes</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4 class="accent-text">🔍 Audit Processus</h4>
+                        <p>Identifier tâches automatisables</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">🎯 Priorisation</h4>
+                        <p>Quick wins vs transformation</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">🤖 Prototype Agent</h4>
+                        <p>Démonstration sur cas réel</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">📈 Roadmap</h4>
+                        <p>Plan déploiement agence par agence</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 12: Pourquoi Maintenant -->
+            <section>
+                <h2><span class="emoji-large">⏰</span> Pourquoi Maintenant ?</h2>
+                <div class="box">
+                    <h3 class="accent-text">La fenêtre d'opportunité</h3>
+                    <ul>
+                        <li><strong class="accent-text">Avantage concurrentiel</strong> — Premiers movers sur l'IA appliquée à l'environnement</li>
+                        <li><strong class="accent-text">Pression réglementaire croissante</strong> — Plus de conformité = plus besoin d'efficience</li>
+                        <li><strong class="accent-text">Exigence clients</strong> — Reporting plus rapide, plus précis</li>
+                        <li><strong class="accent-text">Développement Verdicité</strong> — 5 agences = besoin de scalabilité</li>
+                    </ul>
+                </div>
+                <p class="accent-text">→ Le meilleur moment pour automatiser était hier. Aujourd'hui est le deuxième meilleur.</p>
+            </section>
+
+            <!-- Slide 13: Vision -->
+            <section>
+                <h2><span class="emoji-large">🌍</span> Vision Partenariale</h2>
+                <div class="box box-accent">
+                    <p style="text-align: center;"><strong>"Ensemble, contribuons à l'évolution des territoires vers un futur souhaitable — accéléré par l'IA."</strong></p>
+                </div>
+                <div class="feature-grid" style="margin-top: 0.8em;">
+                    <div class="feature-item">
+                        <h4 class="accent-text">🌿 Verdicité</h4>
+                        <p>Expertise environnementale reconnue</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">⚡ Escape Velocity</h4>
+                        <p>Accélération par agents IA</p>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 0.8em; font-style: italic;">Un partenaire technologique, pas un prestataire de plus.</p>
+            </section>
+
+            <!-- Slide 14: Contact -->
+            <section class="center compact">
+                <div class="logo-dual">
+                    <img src="logo-verdicite.png" alt="Verdicité">
+                    <span style="font-size: 2em; color: var(--vd-green-light);">+</span>
+                    <img src="logo-evo.png" alt="Escape Velocity Operations">
+                </div>
+                <h2 class="hero-gradient">Prêt à accélérer votre conformité ?</h2>
+                <p style="margin-top: 0.5em; font-size: 0.9em;">Votre expertise environnementale + nos agents IA</p>
+                <div class="box contact-box" style="margin: 0.5em auto;">
+                    <p style="margin: 0;">📧 eric@escapevelocity.fr</p>
+                    <p style="margin: 0;">🌐 escapevelocity.fr</p>
+                </div>
+                <div style="margin-top: 0.6em;">
+                    <span class="tag accent-tag">Conformité</span>
+                    <span class="tag">Automatisation</span>
+                    <span class="tag">Environnement</span>
+                    <span class="tag accent-tag">Partenariat</span>
+                </div>
+                <p class="small-note" style="margin-top: 0.6em;">Verdicité © 1998-2025 — Bureau d'études environnement</p>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            center: true,
+            transition: 'slide',
+            width: 1280,
+            height: 800,
+            margin: 0.15,
+            minScale: 0.2,
+            maxScale: 2.0
+        });
+    </script>
+</body>
+</html>
