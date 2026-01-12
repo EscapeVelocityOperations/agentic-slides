@@ -26,7 +26,12 @@
             display: flex !important;
             flex-direction: column;
             justify-content: center;
-            padding: 15px 25px;
+            padding: 10px 25px;
+        }
+
+        /* Compact slides for overflow prevention */
+        .reveal .slides section.compact {
+            padding: 5px 25px;
         }
 
         .reveal .slides section.center {
@@ -248,12 +253,12 @@
         <div class="slides">
 
             <!-- Slide 1: Title -->
-            <section class="center">
+            <section class="center compact">
                 <img src="logo-evo.png" alt="Escape Velocity Operations" class="logo">
                 <h1 class="hero-gradient">Escape Velocity Operations</h1>
                 <h2 class="accent-text">Agents IA & Automatisation</h2>
-                <p style="margin-top: 0.8em; font-size: 0.9em;">Atteignez votre vitesse de libération</p>
-                <div style="margin-top: 1em;">
+                <p style="margin-top: 0.5em; font-size: 0.9em;">Atteignez votre vitesse de libération</p>
+                <div style="margin-top: 0.6em;">
                     <span class="tag">LLM</span>
                     <span class="tag">Multi-Agents</span>
                     <span class="tag">Automatisation</span>
@@ -415,18 +420,18 @@
             </section>
 
             <!-- Slide 10: Réunions Régulières -->
-            <section>
+            <section class="compact">
                 <h2><span class="emoji-large">🤝</span> Phase 2 : Réunions Régulières</h2>
-                <div class="box">
+                <div class="box" style="margin: 0.3em 0;">
                     <h3 class="accent-text">Accompagnement de vos ambassadeurs</h3>
-                    <ul>
+                    <ul style="margin-bottom: 0;">
                         <li><strong>Cadence hebdo ou bimensuelle</strong> — Selon vos besoins</li>
                         <li><strong>Démonstrations</strong> — Voir l'avancement concret</li>
                         <li><strong>Ajustements</strong> — Pivot rapide si nécessaire</li>
                         <li><strong>Montée en compétence</strong> — Experts autonomes</li>
                     </ul>
                 </div>
-                <p class="accent-text">→ Un partenaire, pas un fournisseur. Vos experts restent experts.</p>
+                <p class="accent-text" style="margin-bottom: 0;">→ Un partenaire, pas un fournisseur. Vos experts restent experts.</p>
             </section>
 
             <!-- Slide 11: Cible -->
@@ -534,22 +539,22 @@
             </section>
 
             <!-- Slide 16: Contact -->
-            <section class="center">
+            <section class="center compact">
                 <img src="logo-evo.png" alt="Escape Velocity Operations" class="logo">
                 <h2 class="hero-gradient">Prêt à amplifier VOS forces ?</h2>
-                <p style="margin-top: 0.8em; font-size: 0.9em;">Votre expertise + nos agents = accélération</p>
-                <div class="box contact-box">
-                    <p>📧 eric@escapevelocity.fr</p>
-                    <p>🌐 escapevelocity.fr</p>
-                    <p>📍 Fontenay-sous-Bois, Île-de-France</p>
+                <p style="margin-top: 0.5em; font-size: 0.9em;">Votre expertise + nos agents = accélération</p>
+                <div class="box contact-box" style="margin: 0.5em auto;">
+                    <p style="margin: 0;">📧 eric@escapevelocity.fr</p>
+                    <p style="margin: 0;">🌐 escapevelocity.fr</p>
+                    <p style="margin: 0;">📍 Fontenay-sous-Bois, Île-de-France</p>
                 </div>
-                <div style="margin-top: 1em;">
+                <div style="margin-top: 0.6em;">
                     <span class="tag accent-tag">Agents IA</span>
                     <span class="tag">Automatisation</span>
                     <span class="tag">EdTech</span>
                     <span class="tag accent-tag">Conformité</span>
                 </div>
-                <p class="small-note" style="margin-top: 1em;">On amplifie vos forces, pas de remplacement.</p>
+                <p class="small-note" style="margin-top: 0.6em;">On amplifie vos forces, pas de remplacement.</p>
             </section>
 
         </div>
