@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape Velocity Operations - Agents IA & Automatisation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/theme/black.css">
+    <style>
+        :root {
+            --ev-indigo: #6366f1;
+            --ev-purple: #8b5cf6;
+            --ev-purple-dark: #a855f7;
+            --ev-amber: #fbbf24;
+            --ev-amber-dark: #f59e0b;
+        }
+
+        /* Override reveal.js background */
+        .reveal {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #312e81 100%);
+        }
+
+        /* Section spacing - REDUCED PADDING FOR VIEWPORT */
+        .reveal .slides section {
+            height: 100%;
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center;
+            padding: 15px 25px;
+        }
+
+        .reveal .slides section.center {
+            text-align: center;
+            align-items: center;
+        }
+
+        /* Typography overrides - REDUCED SIZES */
+        .reveal h1 {
+            font-size: 2.2em;
+            margin-bottom: 0.2em;
+            text-transform: none;
+            color: #fff;
+        }
+
+        .reveal h2 {
+            font-size: 1.6em;
+            margin-bottom: 0.3em;
+            text-transform: none;
+            color: #fff;
+        }
+
+        .reveal h3 {
+            font-size: 1.1em;
+            color: var(--ev-amber);
+            text-transform: none;
+            margin-bottom: 0.3em;
+        }
+
+        .reveal h4 {
+            font-size: 0.95em;
+            color: var(--ev-amber);
+            text-transform: none;
+            margin-bottom: 0.2em;
+        }
+
+        /* Gradient text effect */
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--ev-indigo) 0%, var(--ev-purple) 50%, var(--ev-purple-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: var(--ev-purple);
+        }
+
+        .accent-text {
+            color: var(--ev-amber) !important;
+        }
+
+        /* Lists - REDUCED SPACING */
+        .reveal ul {
+            margin-left: 1em;
+            margin-bottom: 0.5em;
+        }
+
+        .reveal li {
+            margin-bottom: 0.4em;
+            line-height: 1.3;
+            font-size: 0.9em;
+        }
+
+        .reveal p {
+            margin-bottom: 0.5em;
+            line-height: 1.3;
+            font-size: 0.9em;
+        }
+
+        /* Tags - improved contrast */
+        .tag {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.25);
+            border: 1px solid var(--ev-indigo);
+            color: #c7d2fe;
+            padding: 0.2em 0.6em;
+            margin: 0.2em;
+            border-radius: 20px;
+            font-size: 0.75em;
+        }
+
+        .accent-tag {
+            background: rgba(251, 191, 36, 0.25);
+            border-color: var(--ev-amber);
+            color: #fef3c7;
+        }
+
+        /* Content boxes - REDUCED PADDING */
+        .box {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            border-radius: 10px;
+            padding: 0.8em 1em;
+            margin: 0.5em 0;
+        }
+
+        .box-accent {
+            border-color: var(--ev-amber);
+            background: rgba(251, 191, 36, 0.08);
+        }
+
+        /* Workflow steps - REDUCED SIZE */
+        .workflow-step {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--ev-indigo), var(--ev-purple));
+            color: white;
+            padding: 0.4em 0.9em;
+            margin: 0.2em;
+            border-radius: 6px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        /* Stats grid - REDUCED SPACING */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8em;
+            margin: 0.8em 0;
+        }
+
+        .stat-box {
+            background: rgba(99, 102, 241, 0.2);
+            padding: 0.8em;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: var(--ev-amber);
+            line-height: 1;
+        }
+
+        .stat-box div {
+            font-size: 0.85em;
+        }
+
+        /* Feature grid - REDUCED SIZE */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.6em;
+            margin: 0.6em 0;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 0.6em 0.8em;
+            border-radius: 8px;
+            border-left: 2px solid var(--ev-indigo);
+        }
+
+        .feature-item p {
+            font-size: 0.8em;
+            margin: 0;
+            color: #cbd5e1;
+        }
+
+        /* Target box */
+        .target-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
+            border: 1px solid var(--ev-purple);
+            padding: 0.8em 1em;
+            border-radius: 10px;
+            margin: 0.6em 0;
+        }
+
+        /* Progress bar */
+        .reveal .progress {
+            height: 3px;
+        }
+
+        .reveal .progress span {
+            background: linear-gradient(90deg, var(--ev-indigo), var(--ev-purple));
+        }
+
+        /* Controls */
+        .reveal .controls button {
+            color: var(--ev-indigo);
+        }
+
+        .reveal .controls button:after {
+            background-color: var(--ev-indigo);
+        }
+
+        /* Strong text */
+        .reveal strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* Emojis - REDUCED SIZE */
+        .emoji-large {
+            font-size: 1.2em;
+        }
+
+        /* Logo styling */
+        .logo {
+            max-height: 80px;
+            margin-bottom: 0.5em;
+        }
+
+        /* Contact box centering */
+        .contact-box {
+            max-width: 450px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        /* Smaller text for notes */
+        .small-note {
+            font-size: 0.75em;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Slide 1: Title -->
+            <section class="center">
+                <img src="logo-evo.png" alt="Escape Velocity Operations" class="logo">
+                <h1 class="hero-gradient">Escape Velocity Operations</h1>
+                <h2 class="accent-text">Agents IA & Automatisation</h2>
+                <p style="margin-top: 0.8em; font-size: 0.9em;">Atteignez votre vitesse de libération</p>
+                <div style="margin-top: 1em;">
+                    <span class="tag">LLM</span>
+                    <span class="tag">Multi-Agents</span>
+                    <span class="tag">Automatisation</span>
+                    <span class="tag accent-tag">25 ans d'expertise</span>
+                </div>
+            </section>
+
+            <!-- Slide 2: Le Problème -->
+            <section>
+                <h2><span class="emoji-large">🚀</span> Le Contexte</h2>
+                <div class="box">
+                    <h3 class="accent-text">Pourquoi l'automatisation maintenant ?</h3>
+                    <ul>
+                        <li><strong class="accent-text">Explosion des capacités IA</strong> — Claude, GPT, modèles spécialisés</li>
+                        <li><strong class="accent-text">Tâches répétitives</strong> — Jusqu'à 40% du temps de travail</li>
+                        <li><strong class="accent-text">Pénurie de talents</strong> — Difficulté à recruter des profils techniques</li>
+                        <li><strong class="accent-text">Pression concurrentielle</strong> — Nécessité d'aller plus vite</li>
+                    </ul>
+                </div>
+                <p class="accent-text">→ Les petites agences doivent faire plus avec moins.</p>
+            </section>
+
+            <!-- Slide 3: Escape Velocity -->
+            <section>
+                <h2><span class="emoji-large">🎯</span> Escape Velocity Operations</h2>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-number">25+</div>
+                        <div>Années d'expérience</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">100%</div>
+                        <div>Engagé sur l'IA</div>
+                    </div>
+                </div>
+                <div class="box">
+                    <h3 class="accent-text">Parcours</h3>
+                    <ul>
+                        <li>Architecte pour l'Internet — Spécialiste multi-technologies</li>
+                        <li>Certifié NVIDIA — Building LLM Applications</li>
+                        <li>Auteur RFC IETF — Standards web</li>
+                        <li>Entrepreneur tech — Plusieurs entreprises créées</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Slide 4: Les Agents IA -->
+            <section>
+                <h2><span class="emoji-large">🤖</span> Qu'est-ce qu'un Agent IA ?</h2>
+                <div class="box">
+                    <p><strong>Un agent IA est un système autonome qui :</strong></p>
+                    <ul>
+                        <li><span class="emoji-large">🔍</span> <strong>Comprend</strong> une demande en langage naturel</li>
+                        <li><span class="emoji-large">🧠</span> <strong>Planifie</strong> les étapes pour atteindre un objectif</li>
+                        <li><span class="emoji-large">🛠️</span> <strong>Exécute</strong> des actions (API, fichiers, requêtes)</li>
+                        <li><span class="emoji-large">🔄</span> <strong>Itère</strong> jusqu'à résolution du problème</li>
+                        <li><span class="emoji-large">📊</span> <strong>Reporte</strong> les résultats de manière claire</li>
+                    </ul>
+                </div>
+                <p class="accent-text">→ Contrairement à un chatbot, un agent <strong>agit</strong>.</p>
+            </section>
+
+            <!-- Slide 5: Cas d'usage -->
+            <section>
+                <h2><span class="emoji-large">💡</span> Cas d'usage pour les Agences</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4 class="accent-text">Documentation</h4>
+                        <p>Génération automatique de docs techniques</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">Recherche</h4>
+                        <p>Analyse de conformité GAR, RGPD, RGAA</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">Transcription</h4>
+                        <p>Transcription vocale assermentée</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">Workflows</h4>
+                        <p>Automatisation n8n processus métier</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 6: Lovable.dev -->
+            <section>
+                <h2><span class="emoji-large">⚡</span> Développement avec Lovable.dev</h2>
+                <div class="box">
+                    <h3 class="accent-text">Vibe Coding — Du code en production</h3>
+                    <ul>
+                        <li><strong class="accent-text">Génération TypeScript/React</strong> — Code propre et maintenable</li>
+                        <li><strong class="accent-text">Lovable Cloud intégré</strong> — Backend, auth, persistance</li>
+                        <li><strong class="accent-text">GitHub natif</strong> — Version control sans friction</li>
+                        <li><strong class="accent-text">Rapidité</strong> — De l'idée au MVP en jours</li>
+                    </ul>
+                </div>
+                <p class="small-note">→ Idéal pour prototyper rapidement des solutions.</p>
+            </section>
+
+            <!-- Slide 7: Lovable Features -->
+            <section>
+                <h2><span class="emoji-large">🛠️</span> Fonctionnalités Lovable</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4 class="accent-text">AI Summaries</h4>
+                        <p>Synthèse automatique textes longs</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">Chatbots</h4>
+                        <p>Agents conversationnels intégrés</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">Ask AI</h4>
+                        <p>Interrogation données en langage naturel</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">DB Agents</h4>
+                        <p>Nettoyage et insights automatiques</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 8: Workflow d'accompagnement -->
+            <section>
+                <h2><span class="emoji-large">📋</span> Workflow d'Accompagnement</h2>
+                <div style="text-align: center; margin: 0.8em 0;">
+                    <div class="workflow-step">1. Assessment Initial</div>
+                    <br>
+                    <span class="accent-text">↓</span>
+                    <br>
+                    <div class="workflow-step">2. Roadmap Personnalisée</div>
+                    <br>
+                    <span class="accent-text">↓</span>
+                    <br>
+                    <div class="workflow-step">3. Réunions Régulières</div>
+                    <br>
+                    <span class="accent-text">↓</span>
+                    <br>
+                    <div class="workflow-step" style="background: linear-gradient(135deg, var(--ev-amber), var(--ev-amber-dark));">4. Déploiement & Mesure</div>
+                </div>
+            </section>
+
+            <!-- Slide 9: Assessment Initial -->
+            <section>
+                <h2><span class="emoji-large">🔍</span> Phase 1 : Assessment Initial</h2>
+                <div class="box">
+                    <h3 class="accent-text">Audit approfondi de votre agence</h3>
+                    <ul>
+                        <li><strong>Analyse des processus</strong> — Tâches automatisables</li>
+                        <li><strong>Cartographie des outils</strong> — Existant et intégrations</li>
+                        <li><strong>Identification des ambassadeurs</strong> — Experts métier clés</li>
+                        <li><strong>Priorisation</strong> — Quick wins vs long terme</li>
+                    </ul>
+                </div>
+                <div class="box box-accent">
+                    <p><strong>Livrable :</strong> Rapport d'opportunités + plan ambassadeurs</p>
+                </div>
+            </section>
+
+            <!-- Slide 10: Réunions Régulières -->
+            <section>
+                <h2><span class="emoji-large">🤝</span> Phase 2 : Réunions Régulières</h2>
+                <div class="box">
+                    <h3 class="accent-text">Accompagnement de vos ambassadeurs</h3>
+                    <ul>
+                        <li><strong>Cadence hebdo ou bimensuelle</strong> — Selon vos besoins</li>
+                        <li><strong>Démonstrations</strong> — Voir l'avancement concret</li>
+                        <li><strong>Ajustements</strong> — Pivot rapide si nécessaire</li>
+                        <li><strong>Montée en compétence</strong> — Experts autonomes</li>
+                    </ul>
+                </div>
+                <p class="accent-text">→ Un partenaire, pas un fournisseur. Vos experts restent experts.</p>
+            </section>
+
+            <!-- Slide 11: Cible -->
+            <section>
+                <h2><span class="emoji-large">🎯</span> Cible : Petites Agences Spécialisées</h2>
+                <div class="target-box">
+                    <h3 class="accent-text" style="text-align: center;">Pour qui ?</h3>
+                    <ul>
+                        <li><strong>Agences web</strong> — 5-50 employés</li>
+                        <li><strong>Cabinets de conseil</strong> — Besoin de productivité</li>
+                        <li><strong>Éditeurs EdTech</strong> — Conformité et contenu</li>
+                        <li><strong>Startups en croissance</strong> — Besoin de vitesse</li>
+                    </ul>
+                </div>
+                <div class="box">
+                    <h3 class="accent-text">Ce que vous gagnez</h3>
+                    <p><span class="emoji-large">⏱️</span> <strong>Temps</strong> — Moins de tâches manuelles</p>
+                    <p><span class="emoji-large">💰</span> <strong>Coûts</strong> — Meilleure marge sur projets</p>
+                    <p><span class="emoji-large">🚀</span> <strong>Vitesse</strong> — Livraison plus rapide</p>
+                    <p><span class="emoji-large">🎓</span> <strong>Autonomie</strong> — Vos experts outillés</p>
+                </div>
+            </section>
+
+            <!-- Slide 12: Pourquoi maintenant -->
+            <section>
+                <h2><span class="emoji-large">⏰</span> Pourquoi Maintenant ?</h2>
+                <div class="box">
+                    <h3 class="accent-text">La fenêtre d'opportunité</h3>
+                    <ul>
+                        <li><strong class="accent-text">Avantage concurrentiel</strong> — Premiers movers sur l'IA agentic</li>
+                        <li><strong class="accent-text">Coût d'entrée baisse</strong> — Outils accessibles sans investissement</li>
+                        <li><strong class="accent-text">Clients demandeurs</strong> — Attente de solutions IA concrètes</li>
+                        <li><strong class="accent-text">Risque d'obsolescence</strong> — Ceux qui n'automatisent pas perdent</li>
+                    </ul>
+                </div>
+                <p class="accent-text">→ Le meilleur moment était hier. Le deuxième meilleur est maintenant.</p>
+            </section>
+
+            <!-- Slide 13: Témoignage / Approche -->
+            <section>
+                <h2><span class="emoji-large">💎</span> Notre Approche</h2>
+                <div class="box">
+                    <p><em>"25 ans d'expérience en développement et création d'entreprises tech."</em></p>
+                    <ul style="margin-top: 0.5em;">
+                        <li><strong>Respectueux</strong> — On construit sur VOTRE expertise</li>
+                        <li><strong>Pragmatique</strong> — Solutions qui fonctionnent</li>
+                        <li><strong>Transparence</strong> — Vous comprenez ce qui est construit</li>
+                        <li><strong>Éthique</strong> — IA responsable, confidentialité respectée</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Slide 14: NOTRE APPROCHE - Collaborer avec VOTRE expertise -->
+            <section>
+                <h2><span class="emoji-large">🤝</span> Notre Philosophie</h2>
+                <div class="box" style="margin-bottom: 1em;">
+                    <h3 class="accent-text" style="text-align: center; margin-bottom: 0.5em;">On ne vient pas avec NOTRE goût.</h3>
+                    <p style="text-align: center;">On construit sur <strong>VOTRE</strong> goût et <strong>VOTRE</strong> expertise.</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-number" style="font-size: 1.6em;">🎯</div>
+                        <div><strong>Votre Expertise</strong></div>
+                        <p class="small-note" style="margin-top: 0.3em;">Vous connaissez votre métier</p>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" style="font-size: 1.6em;">⚡</div>
+                        <div><strong>+ Nos Agents</strong></div>
+                        <p class="small-note" style="margin-top: 0.3em;">= Accélération</p>
+                    </div>
+                </div>
+                <div class="box box-accent" style="margin-top: 0.8em;">
+                    <p style="text-align: center;"><strong>"On amplifie vos forces, pas de remplacement."</strong></p>
+                </div>
+            </section>
+
+            <!-- Slide 14b: PROCESS - Identifier les Ambassadeurs -->
+            <section>
+                <h2><span class="emoji-large">🌟</span> Notre Processus</h2>
+                <div class="box">
+                    <h3 class="accent-text" style="text-align: center;">Identifier les Ambassadeurs</h3>
+                    <p style="text-align: center; margin-top: 0.5em;">Ceux qui <strong>comprennent</strong> votre métier profondément</p>
+                </div>
+                <div class="feature-grid" style="margin-top: 0.8em;">
+                    <div class="feature-item">
+                        <h4 class="accent-text">🔍 Repérer</h4>
+                        <p>Vos experts métier</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">🎓 Former</h4>
+                        <p>Les outiller avec les agents IA</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">🚀 Lancer</h4>
+                        <p>Go-to-market par vos experts</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">📈 Mesurer</h4>
+                        <p>Succès durable</p>
+                    </div>
+                </div>
+                <div class="box box-accent" style="margin-top: 0.8em;">
+                    <p style="text-align: center;"><strong>Votre expertise + nos agents = accélération</strong></p>
+                </div>
+            </section>
+
+            <!-- Slide 16: Contact -->
+            <section class="center">
+                <img src="logo-evo.png" alt="Escape Velocity Operations" class="logo">
+                <h2 class="hero-gradient">Prêt à amplifier VOS forces ?</h2>
+                <p style="margin-top: 0.8em; font-size: 0.9em;">Votre expertise + nos agents = accélération</p>
+                <div class="box contact-box">
+                    <p>📧 eric@escapevelocity.fr</p>
+                    <p>🌐 escapevelocity.fr</p>
+                    <p>📍 Fontenay-sous-Bois, Île-de-France</p>
+                </div>
+                <div style="margin-top: 1em;">
+                    <span class="tag accent-tag">Agents IA</span>
+                    <span class="tag">Automatisation</span>
+                    <span class="tag">EdTech</span>
+                    <span class="tag accent-tag">Conformité</span>
+                </div>
+                <p class="small-note" style="margin-top: 1em;">On amplifie vos forces, pas de remplacement.</p>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            center: true,
+            transition: 'slide',
+            width: 1280,
+            height: 800,
+            margin: 0.15,
+            minScale: 0.2,
+            maxScale: 2.0
+        });
+    </script>
+</body>
+</html>
