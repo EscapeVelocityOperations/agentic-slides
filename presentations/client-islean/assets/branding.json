@@ -1,0 +1,33 @@
+{
+  "client_name": "ISLEAN",
+  "client_slug": "islean",
+  "website": "https://islean-consulting.fr/fr/",
+  "industry": "Strategy & Digital Transformation Consulting",
+  "tagline": "Créer demain. Maintenant.",
+  "founded": "2008+",
+  "colors": {
+    "primary": "#1e3a5f",
+    "secondary": "#2ec4b6",
+    "accent": "#ff6b6b",
+    "warm": "#feca57"
+  },
+  "expertise_areas": [
+    "Education & Numérique",
+    "Dématérialisation du secteur public",
+    "Supply Chain & Logistique",
+    "Smart Building",
+    "Data, IA & RPA",
+    "Stratégie d'entreprise",
+    "Organisation & Excellence opérationnelle",
+    "CIO Advisory"
+  ],
+  "key_facts": {
+    "years_experience": "15+",
+    "nps_score": 79,
+    "location": "32 Rue Guy Moquet, 92240 Malakoff, France",
+    "certifications": ["Qualiopi"]
+  },
+  "value_proposition": "Agentic AI acceleration partnership - technical delivery partner for ISLEAN's strategic consulting",
+  "presentation_language": "fr",
+  "created_date": "2025-01-12"
+}
