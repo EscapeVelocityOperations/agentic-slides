@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, orientation=landscape">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Escape Velocity Operations - Présentation Client</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/theme/black.css">
+    <style>
+        :root {
+            --ev-indigo: #6366f1;
+            --ev-purple: #8b5cf6;
+            --ev-purple-dark: #a855f7;
+            --ev-amber: #fbbf24;
+            --ev-amber-dark: #f59e0b;
+        }
+
+        /* Override reveal.js background */
+        .reveal {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #312e81 100%);
+        }
+
+        /* Section spacing */
+        .reveal .slides section {
+            height: 100%;
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px 30px;
+        }
+
+        .reveal .slides section.center {
+            text-align: center;
+            align-items: center;
+        }
+
+        /* Typography */
+        .reveal h1 {
+            font-size: 2.4em;
+            margin-bottom: 0.3em;
+            text-transform: none;
+            color: #fff;
+        }
+
+        .reveal h2 {
+            font-size: 1.8em;
+            margin-bottom: 0.4em;
+            text-transform: none;
+            color: #fff;
+        }
+
+        .reveal h3 {
+            font-size: 1.2em;
+            color: var(--ev-amber);
+            text-transform: none;
+            margin-bottom: 0.4em;
+        }
+
+        .reveal h4 {
+            font-size: 1.0em;
+            color: var(--ev-amber);
+            text-transform: none;
+            margin-bottom: 0.3em;
+        }
+
+        /* Gradient text effect */
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--ev-indigo) 0%, var(--ev-purple) 50%, var(--ev-purple-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: var(--ev-purple);
+        }
+
+        .accent-text {
+            color: var(--ev-amber) !important;
+        }
+
+        /* Lists */
+        .reveal ul {
+            margin-left: 1.2em;
+            margin-bottom: 0.6em;
+        }
+
+        .reveal li {
+            margin-bottom: 0.5em;
+            line-height: 1.4;
+            font-size: 0.95em;
+        }
+
+        .reveal p {
+            margin-bottom: 0.6em;
+            line-height: 1.4;
+            font-size: 0.95em;
+        }
+
+        /* Tags */
+        .tag {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.25);
+            border: 1px solid var(--ev-indigo);
+            color: #c7d2fe;
+            padding: 0.3em 0.7em;
+            margin: 0.2em;
+            border-radius: 20px;
+            font-size: 0.8em;
+        }
+
+        .accent-tag {
+            background: rgba(251, 191, 36, 0.25);
+            border-color: var(--ev-amber);
+            color: #fef3c7;
+        }
+
+        /* Content boxes */
+        .box {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            border-radius: 12px;
+            padding: 1em 1.2em;
+            margin: 0.6em 0;
+        }
+
+        .box-accent {
+            border-color: var(--ev-amber);
+            background: rgba(251, 191, 36, 0.1);
+        }
+
+        /* Workflow steps */
+        .workflow-step {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--ev-indigo), var(--ev-purple));
+            color: white;
+            padding: 0.5em 1em;
+            margin: 0.3em;
+            border-radius: 8px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        /* Stats grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1em;
+            margin: 1em 0;
+        }
+
+        .stat-box {
+            background: rgba(99, 102, 241, 0.2);
+            padding: 1em;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--ev-amber);
+            line-height: 1;
+        }
+
+        .stat-box div {
+            font-size: 0.9em;
+        }
+
+        /* Feature grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8em;
+            margin: 0.8em 0;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 0.8em 1em;
+            border-radius: 10px;
+            border-left: 3px solid var(--ev-indigo);
+        }
+
+        .feature-item p {
+            font-size: 0.85em;
+            margin: 0;
+            color: #cbd5e1;
+        }
+
+        /* Progress bar */
+        .reveal .progress {
+            height: 4px;
+        }
+
+        .reveal .progress span {
+            background: linear-gradient(90deg, var(--ev-indigo), var(--ev-purple));
+        }
+
+        /* Controls */
+        .reveal .controls button {
+            color: var(--ev-indigo);
+        }
+
+        .reveal .controls button:after {
+            background-color: var(--ev-indigo);
+        }
+
+        /* Strong text */
+        .reveal strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* Emojis */
+        .emoji-large {
+            font-size: 1.3em;
+        }
+
+        /* Logo styling */
+        .logo {
+            max-height: 100px;
+            margin-bottom: 0.6em;
+        }
+
+        /* Contact box */
+        .contact-box {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        /* Small text for notes */
+        .small-note {
+            font-size: 0.8em;
+            color: #94a3b8;
+        }
+
+        /* Mobile and tablet optimizations */
+        @media screen and (max-width: 768px) {
+            .reveal .slides section {
+                padding: 15px 20px;
+            }
+
+            .reveal h1 {
+                font-size: 1.8em;
+            }
+
+            .reveal h2 {
+                font-size: 1.4em;
+            }
+
+            .reveal h3 {
+                font-size: 1.0em;
+            }
+
+            .reveal li, .reveal p {
+                font-size: 0.85em;
+            }
+
+            .stats-grid, .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 0.6em;
+            }
+
+            .logo {
+                max-height: 70px;
+            }
+        }
+
+        /* Landscape orientation enforcement hint for mobile */
+        @media screen and (max-width: 768px) and (orientation: portrait) {
+            .reveal::before {
+                content: "↻ Tournez votre appareil";
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(15, 23, 42, 0.95);
+                color: var(--ev-amber);
+                padding: 1em 2em;
+                border-radius: 12px;
+                font-size: 1.2em;
+                z-index: 9999;
+                border: 2px solid var(--ev-amber);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Slide 1: Titre -->
+            <section class="center">
+                <img src="logo-evo.png" alt="Escape Velocity Operations" class="logo">
+                <h1 class="hero-gradient">Escape Velocity Operations</h1>
+                <h2 class="accent-text">[Votre titre ici]</h2>
+                <p style="margin-top: 1em; font-size: 0.95em;">[Votre sous-titre ou proposition de valeur]</p>
+                <div style="margin-top: 1.2em;">
+                    <span class="tag">IA & Automatisation</span>
+                    <span class="tag">Agents Intelligents</span>
+                    <span class="tag accent-tag">25 ans d'expertise</span>
+                </div>
+            </section>
+
+            <!-- Slide 2: Contexte - Personnalisable -->
+            <section>
+                <h2><span class="emoji-large">🎯</span> Votre Contexte</h2>
+                <div class="box">
+                    <h3 class="accent-text">Les défis de [Votre secteur]</h3>
+                    <ul>
+                        <li><strong class="accent-text">[Défi 1]</strong> — [Description du problème]</li>
+                        <li><strong class="accent-text">[Défi 2]</strong> — [Description du problème]</li>
+                        <li><strong class="accent-text">[Défi 3]</strong> — [Description du problème]</li>
+                        <li><strong class="accent-text">[Défi 4]</strong> — [Description du problème]</li>
+                    </ul>
+                </div>
+                <p class="accent-text">→ [Conclusion : votre compréhension du secteur]</p>
+            </section>
+
+            <!-- Slide 3: Qui sommes-nous -->
+            <section>
+                <h2><span class="emoji-large">🚀</span> Escape Velocity Operations</h2>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-number">25+</div>
+                        <div>Années d'expérience</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">100%</div>
+                        <div>Engagé sur l'IA</div>
+                    </div>
+                </div>
+                <div class="box">
+                    <h3 class="accent-text">Notre parcours</h3>
+                    <ul>
+                        <li><strong>Architecte logiciel</strong> — Spécialiste multi-technologies</li>
+                        <li><strong>Certifié NVIDIA</strong> — Building LLM Applications</li>
+                        <li><strong>Auteur RFC IETF</strong> — Contribution aux standards web</li>
+                        <li><strong>Entrepreneur tech</strong> — Plusieurs entreprises créées</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Slide 4: Qu'est-ce qu'un Agent IA -->
+            <section>
+                <h2><span class="emoji-large">🤖</span> Qu'est-ce qu'un Agent IA ?</h2>
+                <div class="box">
+                    <p><strong>Un agent IA est un système autonome qui :</strong></p>
+                    <ul>
+                        <li><span class="emoji-large">🔍</span> <strong>Comprend</strong> une demande en langage naturel</li>
+                        <li><span class="emoji-large">🧠</span> <strong>Planifie</strong> les étapes pour atteindre un objectif</li>
+                        <li><span class="emoji-large">🛠️</span> <strong>Exécute</strong> des actions (API, fichiers, requêtes)</li>
+                        <li><span class="emoji-large">🔄</span> <strong>Itère</strong> jusqu'à résolution du problème</li>
+                        <li><span class="emoji-large">📊</span> <strong>Reporte</strong> les résultats de manière claire</li>
+                    </ul>
+                </div>
+                <p class="accent-text">→ Contrairement à un chatbot, un agent <strong>agit</strong>.</p>
+            </section>
+
+            <!-- Slide 5: Cas d'usage - Personnalisables -->
+            <section>
+                <h2><span class="emoji-large">💡</span> Cas d'usage pour [Votre type d'organisation]</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4 class="accent-text">[Usage 1]</h4>
+                        <p>[Description du bénéfice]</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">[Usage 2]</h4>
+                        <p>[Description du bénéfice]</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">[Usage 3]</h4>
+                        <p>[Description du bénéfice]</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">[Usage 4]</h4>
+                        <p>[Description du bénéfice]</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 6: Notre approche -->
+            <section>
+                <h2><span class="emoji-large">🤝</span> Notre Approche</h2>
+                <div class="box" style="margin-bottom: 1em;">
+                    <h3 class="accent-text" style="text-align: center; margin-bottom: 0.5em;">Nous ne venons pas avec NOTRE goût.</h3>
+                    <p style="text-align: center;">Nous construisons sur <strong>VOTRE</strong> expertise et <strong>VOTRE</strong> métier.</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-number" style="font-size: 1.8em;">🎯</div>
+                        <div><strong>Votre Expertise</strong></div>
+                        <p class="small-note" style="margin-top: 0.3em;">Vous connaissez votre métier</p>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" style="font-size: 1.8em;">⚡</div>
+                        <div><strong>+ Nos Agents</strong></div>
+                        <p class="small-note" style="margin-top: 0.3em;">= Accélération</p>
+                    </div>
+                </div>
+                <div class="box box-accent" style="margin-top: 1em;">
+                    <p style="text-align: center;"><strong>Nous amplifions vos forces, nous ne remplaçons pas vos experts.</strong></p>
+                </div>
+            </section>
+
+            <!-- Slide 7: Notre processus -->
+            <section>
+                <h2><span class="emoji-large">🌟</span> Notre Processus</h2>
+                <div class="box">
+                    <h3 class="accent-text" style="text-align: center;">Identifier les Ambassadeurs</h3>
+                    <p style="text-align: center; margin-top: 0.5em;">Ceux qui <strong>comprennent</strong> votre métier profondément</p>
+                </div>
+                <div class="feature-grid" style="margin-top: 1em;">
+                    <div class="feature-item">
+                        <h4 class="accent-text">🔍 Repérer</h4>
+                        <p>Vos experts métier clés</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">🎓 Former</h4>
+                        <p>Les outiller avec les agents IA</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">🚀 Lancer</h4>
+                        <p>Déploiement par vos experts</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4 class="accent-text">📈 Mesurer</h4>
+                        <p>Succès et amélioration continue</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 8: Workflow d'accompagnement -->
+            <section>
+                <h2><span class="emoji-large">📋</span> Workflow d'Accompagnement</h2>
+                <div style="text-align: center; margin: 1em 0;">
+                    <div class="workflow-step">1. Assessment Initial</div>
+                    <br>
+                    <span class="accent-text">↓</span>
+                    <br>
+                    <div class="workflow-step">2. Roadmap Personnalisée</div>
+                    <br>
+                    <span class="accent-text">↓</span>
+                    <br>
+                    <div class="workflow-step">3. Réunions Régulières</div>
+                    <br>
+                    <span class="accent-text">↓</span>
+                    <br>
+                    <div class="workflow-step" style="background: linear-gradient(135deg, var(--ev-amber), var(--ev-amber-dark));">4. Déploiement & Mesure</div>
+                </div>
+            </section>
+
+            <!-- Slide 9: Phase 1 - Assessment -->
+            <section>
+                <h2><span class="emoji-large">🔍</span> Phase 1 : Assessment Initial</h2>
+                <div class="box">
+                    <h3 class="accent-text">Audit approfondi de votre organisation</h3>
+                    <ul>
+                        <li><strong>Analyse des processus</strong> — Tâches automatisables</li>
+                        <li><strong>Cartographie des outils</strong> — Existant et intégrations possibles</li>
+                        <li><strong>Identification des ambassadeurs</strong> — Experts métier clés</li>
+                        <li><strong>Priorisation</strong> — Quick wins vs projets long terme</li>
+                    </ul>
+                </div>
+                <div class="box box-accent">
+                    <p><strong>Livrable :</strong> Rapport d'opportunités + plan d'action ambassadeurs</p>
+                </div>
+            </section>
+
+            <!-- Slide 10: Phase 2 - Réunions -->
+            <section>
+                <h2><span class="emoji-large">🤝</span> Phase 2 : Accompagnement</h2>
+                <div class="box">
+                    <h3 class="accent-text">Suivi de vos ambassadeurs</h3>
+                    <ul>
+                        <li><strong>Cadence hebdomadaire ou bimensuelle</strong> — Selon vos besoins</li>
+                        <li><strong>Démonstrations</strong> — Voir l'avancement concret</li>
+                        <li><strong>Ajustements</strong> — Pivot rapide si nécessaire</li>
+                        <li><strong>Montée en compétence</strong> — Experts autonomes</li>
+                    </ul>
+                </div>
+                <p class="accent-text">→ Un partenaire, pas un fournisseur. Vos experts restent experts.</p>
+            </section>
+
+            <!-- Slide 11: Ce que vous gagnez -->
+            <section>
+                <h2><span class="emoji-large">🎁</span> Ce Que Vous Gagnez</h2>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-number">⏱️</div>
+                        <div><strong>Temps</strong></div>
+                        <p class="small-note">Moins de tâches manuelles</p>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">💰</div>
+                        <div><strong>Coûts</strong></div>
+                        <p class="small-note">Meilleure marge</p>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">🚀</div>
+                        <div><strong>Vitesse</strong></div>
+                        <p class="small-note">Livraison plus rapide</p>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">🎓</div>
+                        <div><strong>Autonomie</strong></div>
+                        <p class="small-note">Experts outillés</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 12: Pourquoi maintenant -->
+            <section>
+                <h2><span class="emoji-large">⏰</span> Pourquoi Maintenant ?</h2>
+                <div class="box">
+                    <h3 class="accent-text">La fenêtre d'opportunité</h3>
+                    <ul>
+                        <li><strong class="accent-text">Avantage concurrentiel</strong> — Premiers movers sur l'IA agentic</li>
+                        <li><strong class="accent-text">Coût d'entrée accessible</strong> — Oils sans investissement lourd</li>
+                        <li><strong class="accent-text">Clients demandeurs</strong> — Attente de solutions IA concrètes</li>
+                        <li><strong class="accent-text">Risque d'obsolescence</strong> — Ceux qui n'automatisent pas perdent</li>
+                    </ul>
+                </div>
+                <p class="accent-text">→ Le meilleur moment était hier. Le deuxième meilleur est maintenant.</p>
+            </section>
+
+            <!-- Slide 13: Personnalisation de cette présentation -->
+            <section>
+                <h2><span class="emoji-large">🎨</span> Comment Personnaliser Cette Présentation</h2>
+                <div class="box">
+                    <h3 class="accent-text">Notre méthode de création</h3>
+                    <ul>
+                        <li><strong class="accent-text">Template de base</strong> — Structure adaptable à tout secteur</li>
+                        <li><strong class="accent-text">Personnalisation IA</strong> — Contenu adapté à votre secteur</li>
+                        <li><strong class="accent-text">Revue grammaticale</strong> — Français soigné et professionnel</li>
+                        <li><strong class="accent-text">Format 4:3</strong> — Compatible tous écrans, rotation mobile</li>
+                    </ul>
+                </div>
+                <p class="small-note">Cette présentation est générée avec nos outils IA et adaptée à votre contexte.</p>
+            </section>
+
+            <!-- Slide 14: Prochaines étapes -->
+            <section>
+                <h2><span class="emoji-large">➡️</span> Prochaines Étapes</h2>
+                <div style="text-align: center; margin: 1em 0;">
+                    <div class="workflow-step">1. Échange initial</div>
+                    <br>
+                    <span class="accent-text">↓</span>
+                    <br>
+                    <div class="workflow-step">2. Assessment personnalisé</div>
+                    <br>
+                    <span class="accent-text">↓</span>
+                    <br>
+                    <div class="workflow-step">3. Roadmap d'accompagnement</div>
+                    <br>
+                    <span class="accent-text">↓</span>
+                    <br>
+                    <div class="workflow-step" style="background: linear-gradient(135deg, var(--ev-amber), var(--ev-amber-dark));">4. Déploiement des premiers agents</div>
+                </div>
+            </section>
+
+            <!-- Slide 15: Contact -->
+            <section class="center">
+                <img src="logo-evo.png" alt="Escape Velocity Operations" class="logo">
+                <h2 class="hero-gradient">Prêt à amplifier VOS forces ?</h2>
+                <p style="margin-top: 1em; font-size: 0.95em;">Votre expertise + nos agents = accélération</p>
+                <div class="box contact-box">
+                    <p>📧 eric@escapevelocity.fr</p>
+                    <p>🌐 escapevelocity.fr</p>
+                    <p>📍 Fontenay-sous-Bois, Île-de-France</p>
+                </div>
+                <div style="margin-top: 1.2em;">
+                    <span class="tag accent-tag">Agents IA</span>
+                    <span class="tag">Automatisation</span>
+                    <span class="tag">Conseil</span>
+                    <span class="tag accent-tag">Accompagnement</span>
+                </div>
+                <p class="small-note" style="margin-top: 1em;">Nous amplifions vos forces, nous ne remplaçons pas vos experts.</p>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            center: true,
+            transition: 'slide',
+            // Format 4:3 pour MacBookAir
+            width: 1024,
+            height: 768,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 2.0,
+            // Support rotation et mobile
+            embedded: false,
+            // Optimisation tactile
+            overview: false,
+            // Navigation simplifiée
+            keyboard: true,
+            keyboardCondition: 'nooutline'
+        });
+    </script>
+</body>
+</html>
