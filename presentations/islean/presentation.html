@@ -2,7 +2,9 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, orientation=landscape">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Accélération IA Agentic — Partenaire ISLEAN</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/theme/black.css">
@@ -306,6 +308,57 @@
             margin: 0.6em 0;
             border-radius: 0 8px 8px 0;
         }
+
+        /* Mobile and tablet optimizations */
+        @media screen and (max-width: 768px) {
+            .reveal .slides section {
+                padding: 15px 20px;
+            }
+
+            .reveal h1 {
+                font-size: 1.8em;
+            }
+
+            .reveal h2 {
+                font-size: 1.4em;
+            }
+
+            .reveal h3 {
+                font-size: 1.0em;
+            }
+
+            .reveal li, .reveal p {
+                font-size: 0.85em;
+            }
+
+            .stats-grid, .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 0.6em;
+            }
+
+            .logo {
+                max-height: 70px;
+            }
+        }
+
+        /* Landscape orientation enforcement hint for mobile */
+        @media screen and (max-width: 768px) and (orientation: portrait) {
+            .reveal::before {
+                content: "↻ Tournez votre appareil";
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(15, 23, 42, 0.95);
+                color: var(--ev-amber);
+                padding: 1em 2em;
+                border-radius: 12px;
+                font-size: 1.2em;
+                z-index: 9999;
+                border: 2px solid var(--ev-amber);
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -695,7 +748,7 @@
             center: true,
             hash: true,
             transition: 'slide',
-            width: 1280,
+            width: 1024,
             height: 720,
             margin: 0.04
         });
